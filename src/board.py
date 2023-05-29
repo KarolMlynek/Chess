@@ -16,7 +16,7 @@ class Board:
         initial = move.initial
         final = move.final
         self.squares[initial.row][initial.column].piece = None
-        self.squares[final.row][initial.column].piece = piece
+        self.squares[final.row][final.column].piece = piece
         piece.moved = True
         piece.clear_moves()
         self.last_move = move
@@ -120,7 +120,7 @@ class Board:
                 (-1, 1), (-1, -1), (1, 1), (1, -1), (-1, 0), (0, 1), (1, 0), (0, -1)
             ])
         elif piece.name == "king":
-            pass
+            king_moves()
     def _create(self):
         self.squares = [[0, 0, 0, 0, 0, 0, 0, 0] for column in range(COLUMNS)]
         for row in range(ROWS):
