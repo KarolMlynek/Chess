@@ -3,7 +3,6 @@ class Move:
         self.initial = initial
         self.final = final
 
-    #ogarnąć co robi kod nizej
     def __str__(self):
         s =""
         s += f"({self.initial.column}, {self.initial.row})"

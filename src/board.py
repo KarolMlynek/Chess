@@ -17,12 +17,21 @@ class Board:
         final = move.final
         self.squares[initial.row][initial.column].piece = None
         self.squares[final.row][final.column].piece = piece
+        if piece.name == "pawn":
+            self.check_promotion(piece, final)
+
         piece.moved = True
         piece.clear_moves()
         self.last_move = move
 
     def valid_move(self, piece, move):
         return move in piece.moves
+
+    def check_promotion(self, piece, final):
+        if final.row == 0 or final.row == 7:
+            self.squares[final.row][final.column].piece = Queen(piece.color)
+    def castling(self, initial, final):
+        pass
 
     def calculate_moves(self, piece, row, column):
         def pawn_moves():

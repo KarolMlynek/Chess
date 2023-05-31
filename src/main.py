@@ -45,7 +45,6 @@ class Main:
                 elif event.type == pygame.MOUSEMOTION:
                     motion_row = event.pos[1] // SQSIZE
                     motion_column = event.pos[0] // SQSIZE
-
                     game.set_hoover(motion_row, motion_column)
                     if dragger.dragging:
                         dragger.update_mouse(event.pos)
@@ -64,13 +63,23 @@ class Main:
                         final = Square(released_row, released_column)
                         move = Move(initial, final)
                         if board.valid_move(dragger.piece, move):
+                            captured = board.squares[released_row][released_column].has_piece()
                             board.move(dragger.piece, move)
+                            game.sound_effect(captured)
                             game.show_background(screen)
                             game.show_last_move(screen)
                             game.show_pieces(screen)
                             game.next_turn()
                     dragger.undrag_piece()
-                if event.type == pygame.QUIT:
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_t:
+                        game.change_theme()
+                    if event.key == pygame.K_r:
+                        game.reset()
+                        game = self.game
+                        board = self.game.board
+                        dragger = self.game.dragger
+                elif event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
             pygame.display.update()
