@@ -72,12 +72,13 @@ class Game:
         self.next_player = "white" if self.next_player == "black" else "black"
 
     def set_hoover(self, row, column):
-        self.hovered_square = self.board.squares[row][column]
+        #self.hovered_square = self.board.squares[row][column]
+        pass
 
     def change_theme(self):
         self.config.change_theme()
 
-    def sound_effect(self, captured = False):
+    def sound_effect(self, captured=False):
         if captured:
             self.config.capture_sound.play()
         else:
